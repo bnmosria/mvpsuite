@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'mvpsuite'
+      MYSQL_USER: 'mvpsuite'
+      MYSQL_PASSWORD: 'mvpsuite'
+      MYSQL_ROOT_PASSWORD: 'mvpsuite'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
