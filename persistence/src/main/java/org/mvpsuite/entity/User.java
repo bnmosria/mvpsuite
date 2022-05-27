@@ -1,4 +1,4 @@
-package org.mvpsuite.model;
+package org.mvpsuite.entity;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,8 @@
 package org.mvpsuite.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.mvpsuite.model.User;
+import org.mvpsuite.entity.User;
+import org.mvpsuite.exception.DuplicatedUserName;
 import org.mvpsuite.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,12 @@ public class UserService {
     }
 
     public void addUser(User user) {
+        User existingUser = userRepository.existsByUsername(user.getUserName());
+
+        if (existingUser != null) {
+            throw new DuplicatedUserName();
+        }
+
         userRepository.save(user);
     }
 

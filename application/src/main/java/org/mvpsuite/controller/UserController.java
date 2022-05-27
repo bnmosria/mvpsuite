@@ -1,6 +1,6 @@
 package org.mvpsuite.controller;
 
-import org.mvpsuite.model.User;
+import org.mvpsuite.entity.User;
 import org.mvpsuite.service.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
