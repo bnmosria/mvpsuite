@@ -1,6 +1,7 @@
 package org.mvpsuite.controller;
 
 import org.mvpsuite.entity.User;
+import org.mvpsuite.exception.ResourceNotFoundException;
 import org.mvpsuite.service.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,6 @@ class UserController {
         return ResponseEntity.ok(users);
     }
 
-
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public Object user(@RequestBody User user) {
         userService.addUser(user);
@@ -36,11 +36,11 @@ class UserController {
     }
 
     @GetMapping("{id}")
-    public Object user(@PathVariable("id") UUID id) {
-        Optional<User> user = userService.getUserById(id);
+    public Object user(@PathVariable("id") String id) {
+        Optional<User> user = userService.getUserById(UUID.fromString(id));
 
         if (user.isEmpty()) {
-            return ResponseEntity.notFound();
+            throw new ResourceNotFoundException();
         }
 
         return ResponseEntity.ok(user);

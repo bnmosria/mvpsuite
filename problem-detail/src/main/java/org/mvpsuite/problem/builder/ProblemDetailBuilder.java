@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.mvpsuite.problem.ProblemDetail;
 import org.mvpsuite.problem.member.Detail;
 import org.mvpsuite.problem.member.Status;
+import org.mvpsuite.problem.member.Title;
 import org.springframework.http.HttpStatus;
 
 import java.net.URI;
@@ -35,6 +36,12 @@ public class ProblemDetailBuilder {
     }
 
     private String buildTitle() {
+        Title title = throwable.getClass().getAnnotation(Title.class);
+
+        if (title != null) {
+            return title.value();
+        }
+
         return camelToWords(throwable.getClass().getSimpleName());
     }
 
